@@ -1,4 +1,4 @@
-#Calculadora binária
+# Calculadora binária
 <br>
 Calculadora implementada em C, que tem as seguintes conversões:<br><br>
 1 - De base 10 para:<br>
