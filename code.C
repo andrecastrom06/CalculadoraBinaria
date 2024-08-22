@@ -89,6 +89,40 @@ void decimalhexa(int num) {
   printf("\n");
 }
 
+void decimalbcd(int num){
+  int bcd[8 * 4];
+  int algarismos[8];
+  int cont = 0;
+  int kont = 0;
+  if (num == 0) {
+    printf("Número em BCD: 0000\n");
+    return;
+  }
+  while (num != 0) {
+    algarismos[kont] = num % 10;
+    num = num / 10;
+    kont++;
+  }
+  for (int conti = kont - 1; conti >= 0; conti--) {
+    int konti = algarismos[conti];
+    for (int conte = 3; conte >= 0; conte--) {
+      bcd[cont] = (konti >> conte) & 1;
+      cont++;
+    }
+  }
+    int konte = 0;
+    printf("Número em BCD: ");
+    for (int comt = 0; comt < cont; comt++) {
+        printf("%d", bcd[comt]);
+        konte++;
+        while(konte == 4){
+            printf(" ");
+            konte = 0;
+        }
+    }
+    printf("\n");
+}
+
 int main(void) {
   int escolha = 0, num;
   while(escolha != 7){ 
@@ -108,6 +142,11 @@ int main(void) {
       printf("Qual número quer passar para hexadecimal: ");
       scanf("%d", &num);
       decimalhexa(num);
+    }
+    if (escolha == 4){
+      printf("Qual número quer passar para BCD: ");
+      scanf("%d", &num);
+      decimalbcd(num);
     }
   }
   return 0;
