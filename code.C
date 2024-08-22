@@ -52,6 +52,43 @@ void decimaloctal(int num){
   printf("\n");
 }
 
+void decimalhexa(int num) {
+  char hexadecimal[8];
+  int cont = 0;
+  if (num == 0) {
+    printf("Número em Hexadecimal: 0\n");
+    return;
+  }
+  unsigned int numhexa;
+  if (num < 0) {
+      numhexa = (unsigned int)num;
+  } 
+  else {
+      numhexa = num;
+  }
+  while (numhexa > 0) {
+    int resto = numhexa % 16;
+    if (resto < 10) {
+      hexadecimal[cont] = resto + '0'; 
+    } 
+    else {
+      hexadecimal[cont] = resto - 10 + 'A';
+    }
+      numhexa /= 16;
+    cont++;
+  }
+  if (num < 0) {
+    printf("Número em Hexadecimal: -");
+  } 
+  else {
+    printf("Número em Hexadecimal: ");
+  }
+  for (int kont = cont - 1; kont >= 0; kont--) {
+    printf("%c", hexadecimal[kont]);
+  }
+  printf("\n");
+}
+
 int main(void) {
   int escolha = 0, num;
   while(escolha != 7){ 
@@ -66,6 +103,11 @@ int main(void) {
       printf("Qual número quer passar para octal: ");
       scanf("%d", &num);
       decimaloctal(num);
+    }
+    if (escolha == 3){
+      printf("Qual número quer passar para hexadecimal: ");
+      scanf("%d", &num);
+      decimalhexa(num);
     }
   }
   return 0;
