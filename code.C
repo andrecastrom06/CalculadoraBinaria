@@ -123,6 +123,31 @@ void decimalbcd(int num){
     printf("\n");
 }
 
+void decimal16bits(int num) {
+  int binario[16]; 
+  int cont = 15;
+  for (int kont = 0; kont < 16; kont++) {
+    binario[kont] = 0;
+  }
+  if (num < 0) {
+    num = (1 << 16) + num;
+  }
+  while (num > 0) {
+    binario[cont] = num % 2;
+    num = num / 2;
+    cont--;
+  }
+  printf("Número em binário com 16 bits: ");
+  for (int kont = 0; kont < 16; kont++) {
+    printf("%d", binario[kont]);
+  }
+  printf("\n");
+}
+
+void rfd(int num){
+  
+}
+
 int main(void) {
   int escolha = 0, num;
   while(escolha != 7){ 
@@ -133,20 +158,30 @@ int main(void) {
       scanf("%d", &num);
       decimalbinario(num);
     }
-    if (escolha == 2){
+    else if (escolha == 2){
       printf("Qual número quer passar para octal: ");
       scanf("%d", &num);
       decimaloctal(num);
     }
-    if (escolha == 3){
+    else if (escolha == 3){
       printf("Qual número quer passar para hexadecimal: ");
       scanf("%d", &num);
       decimalhexa(num);
     }
-    if (escolha == 4){
+    else if (escolha == 4){
       printf("Qual número quer passar para BCD: ");
       scanf("%d", &num);
       decimalbcd(num);
+    }
+    else if (escolha == 5){
+      printf("Qual número quer passar para binário com 16 bits e complemento a 2: ");
+      scanf("%d", &num);
+      decimal16bits(num);
+    }
+    else if (escolha == 6){
+      printf("Qual número quer passar para real para float e double, mostrando bits de sinal , expoente, expoente com viés e fração: ");
+      scanf("%d", &num);
+      rfd(num);
     }
   }
   return 0;
