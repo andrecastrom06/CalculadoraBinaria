@@ -1,3 +1,11 @@
+/**
+
+ * Criado em 21 de Agosto 2024
+ * Autor: André Castro
+ * Questão 1 - 26/08/2024 14:09
+
+**/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,122 +13,98 @@
 void decimalbinario(int num){
   int binario[8]; 
   int cont = 0;
-  if (num < 0) {
-    num = (1 << 7) + num;
+  if (num == 0){
+    printf("Número binario de 0: 0");
   }
-  while (num > 0) {
-    binario[cont] = num % 2; 
-    num = num / 2;     
-    cont++;
+  else{
+    printf("%d para binario: \n", num);
+    while (num > 0){
+      printf("%d / 2 resto é %d\n", num, num % 2);
+      binario[cont] = num % 2;
+      cont++;
+      num /= 2;
+    }
+    printf("Binario: ");
+    for (int kont = cont - 1; kont >= 0; kont--){
+      printf("%d", binario[kont]);
+    }
+    printf("\n\n");
   }
-  printf("Número em binário: ");
-  for (int kont = cont - 1; kont >= 0; kont--) {
-    printf("%d", binario[kont]);
-  }
-  printf("\n");
 }
 
 void decimaloctal(int num){
-  int binario[8]; 
+  int octal[8]; 
   int cont = 0;
   if (num == 0){
-    printf("Número em Octal: 0\n");
-    return;
+    printf("Número em octal: 0");
   }
-  if (num < 0) {
-    while (num != 0) {
-      binario[cont] = - (num % 8); 
-      num = num / 8;     
-      cont++;
+  else{
+    printf("%d para octal: \n", num);
+    while (num > 0){
+      printf("%d / 8 resto é %d\n", num, num % 8);
+        octal[cont] = num % 8;
+        cont++;
+        num /= 8;
     }
-    printf("Número em Octal: -");
-    for (int kont = cont - 1; kont >= 0; kont--) {
-      printf("%d", binario[kont]);
+    printf("Octal: ");
+    for (int kont = cont - 1; kont >= 0; kont--){
+      printf("%d", octal[kont]);
     }
-    printf("\n");
-    return;
+    printf("\n\n");
   }
-  while (num > 0) {
-    binario[cont] = num % 8; 
-    num = num / 8;     
-    cont++;
-  }
-  printf("Número em Octal: ");
-  for (int kont = cont - 1; kont >= 0; kont--) {
-    printf("%d", binario[kont]);
-  }
-  printf("\n");
 }
 
 void decimalhexa(int num) {
-  char hexadecimal[8];
+  char hexa[8];
   int cont = 0;
   if (num == 0) {
-    printf("Número em Hexadecimal: 0\n");
-    return;
+    printf("Número em hexadecimal: 0");
   }
-  unsigned int numhexa;
-  if (num < 0) {
-      numhexa = (unsigned int)num;
-  } 
-  else {
-      numhexa = num;
-  }
-  while (numhexa > 0) {
-    int resto = numhexa % 16;
-    if (resto < 10) {
-      hexadecimal[cont] = resto + '0'; 
-    } 
-    else {
-      hexadecimal[cont] = resto - 10 + 'A';
+  else{
+    printf("%d para hexadecimal: \n", num);
+    while (num > 0){
+      int resto = num % 16;
+      if (resto < 10){
+        hexa[cont] = resto + '0';
+      }
+      else{
+        hexa[cont] = resto + 'A' - 10;
+      }
+      printf("%d / 16 resto é %d; em hexadecimal: %c\n", num, resto, hexa[cont]);
+        cont++;
+      num /= 16;
     }
-      numhexa /= 16;
-    cont++;
+    printf("Hexadecimal: ");
+    for (int kont = cont - 1; kont >= 0; kont--){
+      printf("%c", hexa[kont]);
+    }
+  printf("\n\n");
   }
-  if (num < 0) {
-    printf("Número em Hexadecimal: -");
-  } 
-  else {
-    printf("Número em Hexadecimal: ");
-  }
-  for (int kont = cont - 1; kont >= 0; kont--) {
-    printf("%c", hexadecimal[kont]);
-  }
-  printf("\n");
 }
 
 void decimalbcd(int num){
-  int bcd[8 * 4];
-  int algarismos[8];
+  int bcd[8];
   int cont = 0;
-  int kont = 0;
   if (num == 0) {
-    printf("Número em BCD: 0000\n");
-    return;
+    printf("Número em BCD: 0000");
   }
-  while (num != 0) {
-    algarismos[kont] = num % 10;
-    num = num / 10;
-    kont++;
-  }
-  for (int conti = kont - 1; conti >= 0; conti--) {
-    int konti = algarismos[conti];
-    for (int conte = 3; conte >= 0; conte--) {
-      bcd[cont] = (konti >> conte) & 1;
+  else{
+    printf("%d para BCD: \n", num);
+    while (num > 0){
+      int digito = num % 10;
+      num /= 10;
+      printf("%d / 10 = %d\n", digito, digito);
+      for (int kont = 3; kont >= 0; kont--){
+        bcd[cont * 4 + kont] = (digito >> kont) & 1;
+      }
       cont++;
     }
-  }
-    int konte = 0;
-    printf("Número em BCD: ");
-    for (int comt = 0; comt < cont; comt++) {
-        printf("%d", bcd[comt]);
-        konte++;
-        while(konte == 4){
-            printf(" ");
-            konte = 0;
-        }
+    printf("BCD: ");
+    for (int kont = cont * 4 - 1; kont >= 0; kont--){
+      printf("%d", bcd[kont]);
     }
-    printf("\n");
+    printf("\n\n");
+  }
 }
 
 void decimal16bits(int num) {
