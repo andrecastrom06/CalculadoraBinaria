@@ -3,12 +3,12 @@
  * Criado em 21 de Agosto 2024
  * Autor: André Castro
  * Questão 1 - 26/08/2024 14:09
+ * Questão 2 - 23/08/2024 14:41
 
 **/
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 void decimalbinario(int num){
   int binario[8]; 
@@ -107,25 +107,58 @@ void decimalbcd(int num){
   }
 }
 
-void decimal16bits(int num) {
-  int binario[16]; 
-  int cont = 15;
-  for (int kont = 0; kont < 16; kont++) {
-    binario[kont] = 0;
+void decimal16bits(int num){
+  char coma2[16];
+  int cont = 0;
+  if (num == 0){
+    printf("Complemento a 2 de 0 = 0");
   }
-  if (num < 0) {
-    num = (1 << 16) + num;
+  else if (num > 0){
+    printf("%d para binario:\n", num);
+    while (num > 0){
+      printf("%d / 2 = %d\n", num, num % 2);
+      coma2[cont] = num % 2 + '0';
+      cont++;
+      num /= 2;
+    }
+    printf("Binário: ");
+    for (int kont = cont - 1; kont >= 0; kont--){
+      printf("%c", coma2[kont]);
+    }
+    printf("\n");
+    printf("Complemento a 1: ");
+    for (int kont = 0; kont < cont; kont++){
+      if (coma2[kont] == '0'){
+        coma2[kont] = '1';
+      }
+      else{
+        coma2[kont] = '0';
+      }
+    }
+    for (int i = cont - 1; i >= 0; i--){
+      printf("%c", coma2[i]);
+    }
+    printf("\n");
+    printf("Complemento a 2: ");
+    int digitodesoma = 1;
+    for (int kont = 0; kont < cont; kont++){
+      if (coma2[kont] == '1' && digitodesoma == 1){
+        coma2[kont] = '0';
+      }
+      else if (coma2[kont] == '0' && digitodesoma == 1){
+        coma2[kont] = '1';
+        digitodesoma = 0;
+      }
+    }
+    if (digitodesoma == 1){
+      coma2[cont] = '1';
+      cont++;
+    }
+    for (int kont = cont - 1; kont >= 0; kont--){
+      printf("%c", coma2[kont]);
+    }
   }
-  while (num > 0) {
-    binario[cont] = num % 2;
-    num = num / 2;
-    cont--;
-  }
-  printf("Número em binário com 16 bits: ");
-  for (int kont = 0; kont < 16; kont++) {
-    printf("%d", binario[kont]);
-  }
-  printf("\n");
+  printf("\n\n");
 }
 
 void rfd(int num){
