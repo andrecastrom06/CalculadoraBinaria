@@ -2,13 +2,19 @@
 
  * Criado em 21 de Agosto 2024
  * Autor: André Castro
- * Questão 1 - 26/08/2024 14:09
- * Questão 2 - 23/08/2024 14:41
+ * Questão 1:a) - 21/08/2024 18:28
+ * Questão 1:b) - 21/08/2024 19:56
+ * Questão 1:c) - 22/08/2024 17:22
+ * Questão 1:d) - 26/08/2024 14:09
+ * Questão 2 - 26/08/2024 14:41
+ * Questão 3 - 28/08/2024 11:14
 
 **/
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+#include <string.h>
 
 void decimalbinario(int num){
   int binario[8]; 
@@ -161,14 +167,47 @@ void decimal16bits(int num){
   printf("\n\n");
 }
 
-void rfd(int num){
-  
+void converterParaBinario(unsigned long long valor, int tamanho) {
+    for (int i = tamanho - 1; i >= 0; i--) {
+        printf("%llu", (valor >> i) & 1);
+    }
+}
+
+void rpf(float num) {
+  unsigned int bits;
+  memcpy(&bits, &num, sizeof(bits));
+  int sinal = (bits >> 31) & 1;
+  int expoente = (bits >> 23) & 0xFF;
+  unsigned int fracao = bits & 0x7FFFFF;
+  printf("Número: %f\n", num);
+  printf("Sinal: %d\n", sinal);
+  printf("Expoente: %d (0x%X) em binário: ", expoente - 127, expoente);
+  converterParaBinario(expoente, 8);
+  printf("\nFração em binário: ");
+  converterParaBinario(fracao, 23);
+  printf("\n\n");
+}
+
+void rpd(double num) {
+  unsigned long long bits;
+  memcpy(&bits, &num, sizeof(bits));
+  int sinal = (bits >> 63) & 1;
+  int expoente = (bits >> 52) & 0x7FF;
+  unsigned long long fracao = bits & 0xFFFFFFFFFFFFF;
+  printf("Número: %lf\n", num);
+  printf("Sinal: %d\n", sinal);
+  printf("Expoente: %d (0x%X) em binário: ", expoente - 1023, expoente);
+  converterParaBinario(expoente, 11);
+  printf("\nFração em binário: ");
+  converterParaBinario(fracao, 52);
+  printf("\n\n");
 }
 
 int main(void) {
   int escolha = 0, num;
-  while(escolha != 7){ 
-    printf("1 - Decimal para binário\n2 - Decimal para octal\n3 - Decimal para hexadecimal\n4 - Decimal para BCD\n5 - Decimal para binário com sinal com 16 bits usando complemento a 2\n6 - Real para float e double, mostrando bits de sinal , expoente, expoente com viés e fração\n7 - Sair\n-> ");
+  float ero;
+  while(escolha != 8){ 
+    printf("1 - Decimal para binário\n2 - Decimal para octal\n3 - Decimal para hexadecimal\n4 - Decimal para BCD\n5 - Decimal para binário com sinal com 16 bits usando complemento a 2\n6 - Real para float, mostrando bits de sinal , expoente, expoente com viés e fração\n7 - Real para double, mostrando bits de sinal , expoente, expoente com viés e fração\n8 - Sair\n-> ");
     scanf("%d", &escolha);
     if (escolha == 1){
       printf("Qual número quer passar para binário: ");
@@ -196,9 +235,14 @@ int main(void) {
       decimal16bits(num);
     }
     else if (escolha == 6){
-      printf("Qual número quer passar para real para float e double, mostrando bits de sinal , expoente, expoente com viés e fração: ");
-      scanf("%d", &num);
-      rfd(num);
+      printf("Qual número quer passar de real para float, mostrando bits de sinal , expoente, expoente com viés e fração: ");
+      scanf("%f", &ero);
+      rpf(ero);
+    }
+    else if (escolha == 7){
+      printf("Qual número quer passar de real para double, mostrando bits de sinal , expoente, expoente com viés e fração: ");
+      scanf("%f", &ero);
+      rpd(ero);
     }
   }
   return 0;
