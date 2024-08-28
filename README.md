@@ -1,8 +1,8 @@
 # Calculadora binária
 <br>
- * Criado em 21 de Agosto 2024
- * Autor: André Castro (alcms)
- * https://github.com/andrecastrom06/CalculadoraBinaria/tree/main
+ * Criado em 21 de Agosto 2024<br>
+ * Autor: André Castro (alcms)<br>
+ * https://github.com/andrecastrom06/CalculadoraBinaria/tree/main<br>
  * Questão 1:a) - 21/08/2024 18:28<br>
  * Questão 1:b) - 21/08/2024 19:56<br>
  * Questão 1:c) - 22/08/2024 17:22<br>
