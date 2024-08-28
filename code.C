@@ -1,7 +1,8 @@
 /**
 
  * Criado em 21 de Agosto 2024
- * Autor: André Castro
+ * Autor: André Castro (alcms)
+ * https://github.com/andrecastrom06/CalculadoraBinaria/tree/main
  * Questão 1:a) - 21/08/2024 18:28
  * Questão 1:b) - 21/08/2024 19:56
  * Questão 1:c) - 22/08/2024 17:22
